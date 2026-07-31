@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GATE DA Tracker — Official Desktop App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-paper: #f4ecd8;
+      --bg-card: #faf4e6;
+      --ink: #2b2b2b;
+      --ink-light: #525252;
+      --highlight: #d1bfae;
+      --accent: #d9534f;
+      --border: 2.5px solid var(--ink);
+      --shadow: 5px 5px 0px var(--ink);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-paper);
+      color: var(--ink);
+      font-family: 'Special Elite', monospace;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 0 20px; flex: 1; width: 100%; }
+
+    /* Header & Navigation */
+    header {
+      padding: 20px 0;
+      border-bottom: var(--border);
+      background: #e8dec8;
+    }
+    .nav-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand { font-size: 1.4rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--ink-light);
+      max-width: 650px;
+      margin: 0 auto 30px;
+    }
+
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--bg-card);
+      color: var(--ink);
+      border: var(--border);
+      padding: 14px 28px;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+    .btn-primary { background: #2b2b2b; color: #f4ecd8; }
+    .btn:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0px var(--ink); }
+    .btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--ink); }
+
+    /* Live Countdown Box */
+    .countdown-box {
+      border: var(--border);
+      box-shadow: var(--shadow);
+      background: var(--bg-card);
+      padding: 20px;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    .countdown-box h3 { font-size: 1rem; color: var(--ink-light); margin-bottom: 5px; }
+    .timer-display { font-size: 2rem; font-weight: bold; letter-spacing: 2px; }
+
+    /* Feature Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 25px;
+    }
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      border-bottom: 1px dashed var(--ink);
+      padding-bottom: 5px;
+    }
+    .feature-card p { font-size: 0.95rem; color: var(--ink-light); }
+
+    /* Schedule Section */
+    .schedule-box {
+      border: var(--border);
+      background: #e8dec8;
+      box-shadow: var(--shadow);
+      padding: 30px;
+      margin-bottom: 60px;
+    }
+    .schedule-box h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+      text-decoration: underline;
+    }
+    .schedule-list { list-style: none; }
+    .schedule-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--ink);
+      font-size: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: var(--border);
+      background: #e8dec8;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: auto;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .timer-display { font-size: 1.4rem; }
+      .schedule-item { flex-direction: column; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="brand">📟 GATE DA Tracker</div>
+      <a href="https://github.com/uzi/Gate_Da_Tracker" target="_blank" class="btn" style="padding: 6px 14px; font-size: 0.9rem;">GitHub</a>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>GATE DA 2027 Syllabus Tracker</h1>
+      <p>A lightweight, offline-first desktop application designed for Data Science & AI aspirants. Built with Python & PyWebView for maximum efficiency.</p>
+      
+      <div class="btn-group">
+     
+        <a href="https://github.com/uzi2908/Gate_Da_Tracker/releases/latest/download/Setup_GATE_DA_Tracker.exe" class="btn btn-primary">
+          📥 Download for Windows (Free)
+        </a>
+        <a href="https://github.com/uzi2908/Gate_Da_Tracker" target="_blank" class="btn">
+          ⭐ View Source Code
+        </a>
+      </div>
+    </section>
+
+    <!-- Live Exam Countdown -->
+    <div class="countdown-box">
+      <h3>⏳ COUNTDOWN TO GATE DA 2027 (FEB 5, 2027)</h3>
+      <div class="timer-display" id="timerDisplay">Calculating...</div>
+    </div>
+
+    <!-- App Features Grid -->
+    <section class="features-grid">
+      <div class="feature-card">
+        <h3>📊 Interactive Roadmap</h3>
+        <p>Covers all 11 GATE DA modules with detailed topic checklists, status tracking, and completion timestamps.</p>
+      </div>
+      <div class="feature-card">
+        <h3>⚡ Ultra-Lightweight</h3>
+        <p>Built with PyWebView — consumes less than 50MB RAM with zero background battery drain.</p>
+      </div>
+      <div class="feature-card">
+        <h3>📄 Markdown Database</h3>
+        <p>Auto-saves your progress as a standard <code>.md</code> file in your Documents directory. 100% offline & private.</p>
+      </div>
+      <div class="feature-card">
+        <h3>📥 Drag & Drop Ready</h3>
+        <p>Easily load custom Markdown roadmaps by simply dragging and dropping any <code>.md</code> file into the app.</p>
+      </div>
+    </section>
+
+    <!-- Official GATE 2027 Schedule -->
+    <div class="schedule-box">
+      <h2>📌 Official GATE 2027 Key Dates</h2>
+      <ul class="schedule-list">
+        <li class="schedule-item"><span>🚀 Online Registration Starts:</span> <strong>August 14, 2026</strong></li>
+        <li class="schedule-item"><span>📅 Regular Closing Date (No Late Fee):</span> <strong>September 21, 2026</strong></li>
+        <li class="schedule-item"><span>⚠️ Extended Closing Date (With Late Fee):</span> <strong>September 30, 2026</strong></li>
+        <li class="schedule-item"><span>🎯 GATE DA Exam Date:</span> <strong>February 5, 2027</strong></li>
+        <li class="schedule-item"><span>🏆 Result Declaration:</span> <strong>March 19, 2027</strong></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    Made with ❤️ by Ujjwal Sharma
+  </footer>
+
+  <script>
+    /* Live Countdown Logic */
+    const targetExamDate = new Date("February 5, 2027 00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetExamDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('timerDisplay').innerText = "🎉 EXAM DAY HAS ARRIVED!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('timerDisplay').innerText = 
+        `${days}d : ${String(hours).padStart(2, '0')}h : ${String(minutes).padStart(2, '0')}m : ${String(seconds).padStart(2, '0')}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
